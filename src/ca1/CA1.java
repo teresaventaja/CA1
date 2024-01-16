@@ -32,7 +32,14 @@ Workload>
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        
+int length = 0;
+String[] name = new String[length];
+String[] numClasses = new String[length];
+        ReadFile Students = new ReadFile();
+        //Students.numStudents("students.txt");
+        Students.declareVariables("students.txt");
+System.out.println(name[2]);
+
         //loop
     }
     
