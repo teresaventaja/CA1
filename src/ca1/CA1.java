@@ -5,6 +5,7 @@
 package ca1;
 
 import java.io.FileNotFoundException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -36,9 +37,17 @@ Workload>
      */
     public static void main(String[] args) throws FileNotFoundException {
         // TODO code application logic here
+      
+        assignVariables firstAttempt = new assignVariables();        
+firstAttempt.findStudents("students.txt");
+    long lines = 0;
+        /*
         ArrayList<Students> AllStudents = new ArrayList<>();
 assignVariables firstAttempt = new assignVariables();        
 firstAttempt.findStudents("students.txt");
+
+
+*/
     }
     
 }

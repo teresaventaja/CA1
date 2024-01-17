@@ -21,4 +21,9 @@ public class Students {
     this.studentNumber = studentNumber;
     }
     
+        public String getStudentName(){
+        return name;
+    }
+    
+    
 }
