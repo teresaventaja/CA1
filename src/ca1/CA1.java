@@ -4,6 +4,10 @@
  */
 package ca1;
 
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  *
  * @author User
@@ -30,17 +34,11 @@ Student number> - Second Name>
 Workload>
 
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         // TODO code application logic here
-int length = 0;
-String[] name = new String[length];
-String[] numClasses = new String[length];
-        ReadFile Students = new ReadFile();
-        //Students.numStudents("students.txt");
-        Students.declareVariables("students.txt");
-System.out.println(name[2]);
-
-        //loop
+        ArrayList<Students> AllStudents = new ArrayList<>();
+assignVariables firstAttempt = new assignVariables();        
+firstAttempt.findStudents("students.txt");
     }
     
 }
