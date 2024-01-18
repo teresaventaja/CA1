@@ -5,9 +5,12 @@
 package ca1;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -37,17 +40,23 @@ Workload>
      */
     public static void main(String[] args) throws FileNotFoundException {
         // TODO code application logic here
-      
+ 
         assignVariables firstAttempt = new assignVariables();        
-firstAttempt.findStudents("students.txt");
-    long lines = 0;
-        /*
-        ArrayList<Students> AllStudents = new ArrayList<>();
-assignVariables firstAttempt = new assignVariables();        
-firstAttempt.findStudents("students.txt");
-
-
-*/
+        try {
+            firstAttempt.findLength("students.txt");
+            
+            /*
+            ArrayList<Students> AllStudents = new ArrayList<>();
+            assignVariables firstAttempt = new assignVariables();
+            firstAttempt.findStudents("students.txt");
+            
+            
+        */      } catch (IOException ex) {
+            Logger.getLogger(CA1.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+firstAttempt.assignStudents();
+        
     }
     
 }
