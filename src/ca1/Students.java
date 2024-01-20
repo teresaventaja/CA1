@@ -20,10 +20,18 @@ public class Students {
     this.numClasses = numClasses;
     this.studentNumber = studentNumber;
     }
-    
-        public String getStudentName(){
+
+    // Getters for the fields
+    public String getStudentName() {
         return name;
     }
-    
-    
+        
+    public String getStudentNumber() {
+        return studentNumber;
+    }
+
+    public String getNumberOfClasses() {
+        return numClasses;
+    }
+      
 }

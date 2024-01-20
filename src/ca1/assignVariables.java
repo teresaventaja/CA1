@@ -12,6 +12,7 @@ import java.io.IOException;
 import static java.lang.System.console;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -19,7 +20,74 @@ import java.util.Scanner;
  * @author User
  */
 public class assignVariables {
-   ArrayList<Students> AllStudents = new ArrayList<>();
+   List<Students> studentList = new ArrayList<>();
+public String name;        
+
+public String[][] assignStudents(String file) {
+try {
+            //File file = new File("students.txt");
+            //FileReader fr = new FileReader(file);
+            BufferedReader br = new BufferedReader(new FileReader (file));
+            while ((name = br.readLine()) != null) { //reads first line
+            String numClasses = br.readLine();  //reads second line
+            if (numClasses == null) { 
+            System.out.println("Incomplete data after student name: " + name);
+            break;
+                }
+        String studentNumber = br.readLine(); // Read third line (student number)
+        if (studentNumber == null) {
+            System.out.println("Incomplete data after number of classes for student: " + name);
+            break;
+        }
+                // Assuming a constructor that takes student name, number of classes, and student number
+                Students student = new Students(name, numClasses, studentNumber);
+                studentList.add(student);
+            }
+            br.close();
+        } catch (IOException e) {
+            System.out.println(e);
+            e.printStackTrace();
+        } return null;
+} 
+
+        Students[] studentsArray = new Students[studentList.size()];
+        studentsArray = studentList.toArray(studentsArray);
+        
+                String[][] studentDataArray = new String[studentList.size()][3];
+        for (int i = 0; i < studentList.size(); i++) {
+            assignVariables student = studentList.get(i);
+            studentDataArray[i][0] = student.getStudentName();
+            studentDataArray[i][1] = student.getNumberOfClasses();
+            studentDataArray[i][2] = student.getStudentNumber();
+        }
+
+
+}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+   /* 
+  
+ArrayList<Students> AllStudents = new ArrayList<>();
   
 public String name;
 public String numClasses;
@@ -39,7 +107,6 @@ public int findLength (String fileName) throws FileNotFoundException, IOExceptio
   }
 
 
-
 public String[][] all_students = new String[length][3];
         
 public String[][] assignStudents() {
@@ -53,7 +120,6 @@ public String[][] assignStudents() {
     
 return all_students;
 }
-
 
 
 public void findStudents (String fileName) throws FileNotFoundException {
@@ -86,15 +152,7 @@ for (int row=0; row<all_students.length; row++) {
             }
         }
 
-*/
-}
 
-
-}
-
-
-    
-    /*
       public String findStudentByName (String name, ArrayList<Students> AllStudents){
         for (Students St : AllStudents){
             if(St.getStudentName().equalsIgnoreCase(name)) return St;
@@ -103,13 +161,6 @@ for (int row=0; row<all_students.length; row++) {
     }  
     
 }
-use length
-
-
-length = 0;
-while (scanner.hasNextLine()) {
-length += 1;
-}
-System.out.println(length);
 */
+
 
