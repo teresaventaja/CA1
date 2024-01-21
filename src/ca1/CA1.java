@@ -42,39 +42,18 @@ Workload>
         // TODO code application logic here
  
         assignVariables firstAttempt = new assignVariables();        
-        try {
-            firstAttempt.assignStudents("students.txt");
-            
-            /*
-            ArrayList<Students> AllStudents = new ArrayList<>();
-            assignVariables firstAttempt = new assignVariables();
-            firstAttempt.findStudents("students.txt");
-            
-            
-        */      } catch (IOException ex) {
-            Logger.getLogger(CA1.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        firstAttempt.assignStudents("students.txt");
+        
+        /*
+        ArrayList<Students> AllStudents = new ArrayList<>();
+        assignVariables firstAttempt = new assignVariables();
+        firstAttempt.findStudents("students.txt");
         
         
-        Students[] studentsArray = new Students[studentList.size()];
-        studentsArray = studentList.toArray(studentsArray);
+        */
+        
+        
 
-        // If you need a 2D array with each student in its own row and the data in columns
-        // Assuming each student will have 3 data fields
-        String[][] studentDataArray = new String[studentList.size()][3];
-        for (int i = 0; i < studentList.size(); i++) {
-            assignVariables student = studentList.get(i);
-            studentDataArray[i][0] = student.getStudentName();
-            studentDataArray[i][1] = student.getNumberOfClasses();
-            studentDataArray[i][2] = student.getStudentNumber();
-        }
-        
-for (Students student : Students) {
-            System.out.println("Student Name: " + student.getStudentName());
-            System.out.println("Number of Classes: " + student.getNumberOfClasses());
-            System.out.println("Student Number: " + student.getStudentNumber());
-            System.out.println(); // Print an empty line for better readability
-        }
         
     }
     

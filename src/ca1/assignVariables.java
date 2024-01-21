@@ -44,23 +44,36 @@ try {
                 studentList.add(student);
             }
             br.close();
-        } catch (IOException e) {
-            System.out.println(e);
-            e.printStackTrace();
-        } return null;
-} 
-
+            
+            
         Students[] studentsArray = new Students[studentList.size()];
         studentsArray = studentList.toArray(studentsArray);
         
-                String[][] studentDataArray = new String[studentList.size()][3];
+        
+        String[][] studentDataArray = new String[studentList.size()][3];
         for (int i = 0; i < studentList.size(); i++) {
-            assignVariables student = studentList.get(i);
+            Students student = studentList.get(i);
             studentDataArray[i][0] = student.getStudentName();
             studentDataArray[i][1] = student.getNumberOfClasses();
             studentDataArray[i][2] = student.getStudentNumber();
         }
+ // checking if it worked
+        for (Students student : studentsArray) {
+            System.out.println("Student Name: " + student.getStudentName());
+            System.out.println("Number of Classes: " + student.getNumberOfClasses());
+            System.out.println("Student Number: " + student.getStudentNumber());
+            System.out.println(); // Print an empty line for better readability
+        }
+            
+        } catch (IOException e) {
+            System.out.println(e);
+            e.printStackTrace();
+        } return null;
+        
+        
+} 
 
+        
 
 }
     
