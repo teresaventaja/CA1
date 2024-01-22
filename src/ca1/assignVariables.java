@@ -28,39 +28,70 @@ try {
             //File file = new File("students.txt");
             //FileReader fr = new FileReader(file);
             BufferedReader br = new BufferedReader(new FileReader (file));
-            while (br.readLine() != null) { //reads first line
-            name = br.readLine();
-            int indexOfSpace = name.indexOf(" ");
-            String firstName =  name.substring(0,indexOfSpace);
-            String secondName =  name.substring((indexOfSpace+1));
-            if (!firstName.matches("[A-Za-z]+")) {
-                System.out.println("The first name must contain only letters");
-            } else {
-                System.out.println("The first name's format is correct");
-            }  
-            if (!secondName.matches("^[a-zA-Z0-9]+$")) {
-                System.out.println("The second name must contain letters and / or numbers");
-            } else {
-                System.out.println("The first name's format is correct");
-            }  
+        while ((name = br.readLine()) != null) { //reads first line
+            //name = br.readLine();
+            name = name.trim(); // Remove whitespaces
             String numClasses = br.readLine();  //reads second line
             if (numClasses == null) { 
             System.out.println("Incomplete data after student name: " + name);
             break;
                 }
-            
             String studentNumber = br.readLine(); // Read third line (student number)
             if (studentNumber == null) {
             System.out.println("Incomplete data after number of classes for student: " + name);
             break;
             }
-            
-                // A constructor that takes student name, number of classes, and student number
+           
+ 
+            int indexOfSpace = name.indexOf(" ");
+    if (indexOfSpace == -1) {
+            System.out.println("Invalid format: name does not contain a space");
+            continue; 
+            }
+            String firstName =  name.substring(0,indexOfSpace);
+            String secondName =  name.substring(indexOfSpace+1);
+    if (!firstName.matches("[A-Za-z]+")) {
+                System.out.println("The first name must contain only letters");
+            } else if (!secondName.matches("^[a-zA-Z0-9]+$")) {
+                System.out.println("The second name must contain letters and / or numbers");
+            }
+    if (!numClasses.matches("[0-9]+")) {
+                System.out.println("The number of classes must contain numbers");
+            }
+    studentNumber = studentNumber.trim(); // Remove whitespaces
+    String firstPartStudentNumber = studentNumber.substring(0,1);
+    String secondPartSN1 = studentNumber.substring(2,3);
+    String secondPartSN2 = studentNumber.substring(2,4);
+    String lastPartTrigger = studentNumber.substring(4,4);
+    String lastPartSN;
+    if (studentNumber.length() <= 6) {
+                System.out.println("The student number must be at least 6 characters long");
+            } else if (!firstPartStudentNumber.matches("[0-9]+")) {
+                System.out.println("The student number must start with 2 numbers");
+            } else if ((!secondPartSN1.matches("[A-Za-z]+")) || (!secondPartSN2.matches("[A-Za-z]+"))) {
+                System.out.println("The 3rd, 4rd - and sometimes the 5th character too - of the student number must be letters");
+    if (lastPartTrigger.matches("[A-Za-z]+")) {
+            lastPartSN = studentNumber.substring(5);
+                if (!lastPartSN.matches("[0-9]+")){
+    System.out.println("The last part of the student number must be numbers");
+    }
+            } else if (lastPartTrigger.matches("[0-9]+")) {
+            lastPartSN = studentNumber.substring(4);
+                if (!lastPartSN.matches("[0-9]+")){
+    System.out.println("The last part of the student number must be numbers");
+    }
+            }
+br.close();
+                    
+
+
+// A constructor that takes student name, number of classes, and student number
+   
                 Students student = new Students(name, numClasses, studentNumber);
                 studentList.add(student);
             }
-            br.close();
             
+        }
             
         Students[] studentsArray = new Students[studentList.size()];
         studentsArray = studentList.toArray(studentsArray);
@@ -80,10 +111,11 @@ try {
             System.out.println("Student Number: " + student.getStudentNumber());
             System.out.println(); // Print an empty line for better readability
         }
-            
+          
         } catch (IOException e) {
             System.out.println(e);
         } return null;
+       
         
         
 } 
