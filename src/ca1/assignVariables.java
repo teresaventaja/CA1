@@ -39,7 +39,7 @@ try {
                 System.out.println("The first name's format is correct");
             }  
             if (!secondName.matches("^[a-zA-Z0-9]+$")) {
-                System.out.println("The second name must contain only letters");
+                System.out.println("The second name must contain letters and / or numbers");
             } else {
                 System.out.println("The first name's format is correct");
             }  
