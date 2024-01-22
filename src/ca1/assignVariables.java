@@ -28,18 +28,34 @@ try {
             //File file = new File("students.txt");
             //FileReader fr = new FileReader(file);
             BufferedReader br = new BufferedReader(new FileReader (file));
-            while ((name = br.readLine()) != null) { //reads first line
+            while (br.readLine() != null) { //reads first line
+            name = br.readLine();
+            int indexOfSpace = name.indexOf(" ");
+            String firstName =  name.substring(0,indexOfSpace);
+            String secondName =  name.substring((indexOfSpace+1));
+            if (!firstName.matches("[A-Za-z]+")) {
+                System.out.println("The first name must contain only letters");
+            } else {
+                System.out.println("The first name's format is correct");
+            }  
+            if (!secondName.matches("^[a-zA-Z0-9]+$")) {
+                System.out.println("The second name must contain only letters");
+            } else {
+                System.out.println("The first name's format is correct");
+            }  
             String numClasses = br.readLine();  //reads second line
             if (numClasses == null) { 
             System.out.println("Incomplete data after student name: " + name);
             break;
                 }
-        String studentNumber = br.readLine(); // Read third line (student number)
-        if (studentNumber == null) {
+            
+            String studentNumber = br.readLine(); // Read third line (student number)
+            if (studentNumber == null) {
             System.out.println("Incomplete data after number of classes for student: " + name);
             break;
-        }
-                // Assuming a constructor that takes student name, number of classes, and student number
+            }
+            
+                // A constructor that takes student name, number of classes, and student number
                 Students student = new Students(name, numClasses, studentNumber);
                 studentList.add(student);
             }
@@ -67,7 +83,6 @@ try {
             
         } catch (IOException e) {
             System.out.println(e);
-            e.printStackTrace();
         } return null;
         
         
