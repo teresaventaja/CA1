@@ -16,12 +16,9 @@ import java.util.logging.Logger;
  *Github: https://github.com/teresaventaja/CA1
      * When in operation, the program will be given a file named “students.txt” – this contains the details of (fictitious) students in the following format: 
 
-Your task is to: 
-3)	If the data is valid, I need to output the data to a file named myfile.txt, in the following format:
-Student number - Second Name
-Workload
-* 
-* The workload: if numClasses is 1, "very light"; if numClasses is 2, "light"; if numClasses is 1, "very light"; if numClasses is 3,4,5, "part time"; if numClasses is 6,7,8 "part time"; 
+student number year 2020 (Start of number 20 or higher)
+* number after letter is between 1-200
+* menu user decide standard operation or adding (validated) data to the file via console (invalid data should not be saved)
  * @author User
  */
 public class CA1 {

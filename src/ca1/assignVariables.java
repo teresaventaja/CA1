@@ -140,7 +140,7 @@ return errors;
  
 
 public void outputToFile(List<Students> studentList) {
-    try (PrintWriter writer = new PrintWriter("myfile.txt")) {
+    try (PrintWriter writer = new PrintWriter("status.txt")) {
         for (Students student : studentList) {
             String workload = determineWorkload(student.getNumberOfClasses());
             String secondName = getSecondName(student.getStudentName());
