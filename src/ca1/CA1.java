@@ -17,8 +17,6 @@ import java.util.logging.Logger;
      * When in operation, the program will be given a file named “students.txt” – this contains the details of (fictitious) students in the following format: 
 
 Your task is to: 
-1)	Read the data from the file and check that it is valid. The file may contain more than one student, so an appropriate loop should be used. The data must obey the following rules: 
-2)	If the data is not valid, you should output a useful error message on screen to the user.
 3)	If the data is valid, then you have to output the data to a file named status.txt, in the following format:
 Student number> - Second Name>
 Workload>
@@ -28,10 +26,16 @@ public class CA1 {
 
 
     public static void main(String[] args) throws FileNotFoundException {
-        // TODO code application logic here
 
-        assignVariables firstAttempt = new assignVariables();  
+        // Instanciating assignVariables Class
+        assignVariables firstAttempt = new assignVariables();
+       
+//-----------------READING FILE, VALIDATING CONTENT, AND ASSIGNING VALUES------------- 
+        
+        // Calling assignStudents method
         firstAttempt.assignStudents("students.txt");
+        
+//-----------------OUTPUT IN A NEW FILE, TRANSFORMING THE DATA------------- 
 
     }
     
