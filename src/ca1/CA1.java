@@ -13,13 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
- * @author User
- */
-public class CA1 {
-
-    /**
-     * Github: https://github.com/teresaventaja/CA1
+ *Github: https://github.com/teresaventaja/CA1
      * When in operation, the program will be given a file named “students.txt” – this contains the details of (fictitious) students in the following format: 
 
 Your task is to: 
@@ -28,8 +22,11 @@ Your task is to:
 3)	If the data is valid, then you have to output the data to a file named status.txt, in the following format:
 Student number> - Second Name>
 Workload>
+ * @author User
+ */
+public class CA1 {
 
-     */
+
     public static void main(String[] args) throws FileNotFoundException {
         // TODO code application logic here
     //String name = null; 
@@ -40,14 +37,7 @@ Workload>
        // firstAttempt.dataValidation(name, numClasses, studentNumber);
         
        // firstAttempt.dataValidation();
-                
-       
-        
-
-
-        
-
-        
+  
     }
     
 }

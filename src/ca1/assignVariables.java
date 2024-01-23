@@ -26,77 +26,58 @@ public class assignVariables {
     public String numClasses; 
     public String studentNumber; 
     
-    
 public String[][] assignStudents(String file) {
 
- 
 try {
           // String name; 
             //File file = new File("students.txt");
             //FileReader fr = new FileReader(file);
             BufferedReader br = new BufferedReader(new FileReader (file));
         while ((name = br.readLine()) != null) { //reads first line
-            //name = br.readLine();
             name = name.trim(); // Remove whitespaces
             numClasses = br.readLine();  //reads second line
-            if (numClasses == null) { 
-            System.out.println("Incomplete data after student name: " + name);
-            break;
-                }
             studentNumber = br.readLine(); // Read third line (student number)
-            if (studentNumber == null) {
-            System.out.println("Incomplete data after number of classes for student: " + name);
-            break;
-            } 
-                
             
-            
-            
+            if (numClasses == null || studentNumber == null) { 
+            System.out.println("Incomplete data after student name: " + name);
+            continue;
+                }
+
+                 
             List<String> validationErrors = dataValidation(name, numClasses, studentNumber);
         if (validationErrors.isEmpty()) {
             Students newStudent = new Students(name, numClasses, studentNumber);
             studentList.add(newStudent);
-        } else {
-            for (String error : validationErrors) {
-                System.out.println(error); // Print each error message
-            }
-            continue; // Skip to the next iteration since this student failed validation
-        }
- 
-        
-                       Students newStudent = new Students(name, numClasses, studentNumber);
-                studentList.add(newStudent);
-         String[][] studentDataArray = new String[studentList.size()][3];
-                
-                 for (int i = 0; i < studentList.size(); i++) {
+            String[][] studentDataArray = new String[studentList.size()][3];
+            for (int i = 0; i < studentList.size(); i++) {
             //assignVariables student = studentList.get(i);
             newStudent = studentList.get(i);
             studentDataArray[i][0] = newStudent.getStudentName();
             studentDataArray[i][1] = newStudent.getNumberOfClasses();
             studentDataArray[i][2] = newStudent.getStudentNumber();
         }
-        
-      //  return studentDataArray;
+        } else {
+            for (String error : validationErrors) {
+                System.out.println(error); // Print each error message
+            }
+            continue; // Skip to the next iteration since this student failed validation
+        }
+/*
  // checking if it worked
         for (Students student : studentList) {
             System.out.println("Student Name: " + student.getStudentName());
             System.out.println("Number of Classes: " + student.getNumberOfClasses());
             System.out.println("Student Number: " + student.getStudentNumber());
             System.out.println(); // Print an empty line for better readability
+
         }
-        
-
-
-
-                 }
-
+*/
+        }
             br.close();
-  
         } catch (IOException e) {
             System.out.println(e);
             e.printStackTrace();
-        } return null;
-        
+        } return null;  
 }
         
 public List<String> dataValidation(String name, String numClasses, String studentNumber) {
@@ -118,8 +99,8 @@ int indexOfSpace = name.indexOf(" ");
                 errors.add("The second name must contain letters and / or numbers");  
                 //System.out.println("The second name must contain letters and / or numbers");
             }
-    if (!numClasses.matches("[0-9]+")) {
-        errors.add("The number of classes must contain numbers");          
+    if ((!numClasses.matches("[0-9]+")) && (!numClasses.contains("1")) || (!numClasses.contains("2")) || (!numClasses.contains("3")) || (!numClasses.contains("4")) || (!numClasses.contains("5")) || (!numClasses.contains("6")) || (!numClasses.contains("7")) || (!numClasses.contains("8")) ) {
+        errors.add("The number of classes must contain numbers 1-9");          
         //System.out.println("The number of classes must contain numbers");
             }
     studentNumber = studentNumber.trim(); // Remove whitespaces
