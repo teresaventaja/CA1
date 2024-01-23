@@ -29,9 +29,6 @@ public class assignVariables {
 public String[][] assignStudents(String file) {
 
 try {
-          // String name; 
-            //File file = new File("students.txt");
-            //FileReader fr = new FileReader(file);
             BufferedReader br = new BufferedReader(new FileReader (file));
         while ((name = br.readLine()) != null) { //reads first line
             name = name.trim(); // Remove whitespaces
@@ -82,65 +79,54 @@ try {
         
 public List<String> dataValidation(String name, String numClasses, String studentNumber) {
     List<String> errors = new ArrayList<>();
-    //boolean isValid = true;
+
 int indexOfSpace = name.indexOf(" ");
     if (indexOfSpace == -1) {
         errors.add("Invalid format: name does not contain a space");
-        
-    //System.out.println("Invalid format: name does not contain a space");
-            //continue; 
             }
             String firstName =  name.substring(0,indexOfSpace);
             String secondName =  name.substring(indexOfSpace+1);
     if (!firstName.matches("[A-Za-z]+")) {
                 errors.add("The first name must contain only letters");        
-       // System.out.println("The first name must contain only letters");
             } else if (!secondName.matches("^[a-zA-Z0-9]+$")) {
                 errors.add("The second name must contain letters and / or numbers");  
-                //System.out.println("The second name must contain letters and / or numbers");
             }
-    if ((!numClasses.matches("[0-9]+")) && (!numClasses.contains("1")) || (!numClasses.contains("2")) || (!numClasses.contains("3")) || (!numClasses.contains("4")) || (!numClasses.contains("5")) || (!numClasses.contains("6")) || (!numClasses.contains("7")) || (!numClasses.contains("8")) ) {
-        errors.add("The number of classes must contain numbers 1-9");          
-        //System.out.println("The number of classes must contain numbers");
+    if ((!numClasses.matches("[1-8]")) ) {
+        errors.add("The number of classes must contain numbers 1-8");          
             }
     studentNumber = studentNumber.trim(); // Remove whitespaces
-    String firstPartStudentNumber = studentNumber.substring(0,1);
-    String secondPartSN1 = studentNumber.length() > 2 ? studentNumber.substring(2, 3) : ""; //studentNumber.substring(2,3);
-    String secondPartSN2 = studentNumber.length() > 2 ? studentNumber.substring(2, 4) : ""; //studentNumber.substring(2,4);
-    String lastPartTrigger = studentNumber.length() > 4 ? studentNumber.substring(4, 5) : "";//studentNumber.substring(4,4);
-    String lastPartSN;
+    String firstPartStudentNumber = studentNumber.substring(0,2);
+    String secondPartSN1 = studentNumber.length() > 2 ? studentNumber.substring(2, 4) : ""; //studentNumber.substring(2,3);
+    String secondPartSN2 = studentNumber.length() > 2 ? studentNumber.substring(2, 4) : ""; 
+    String lastPartTrigger = studentNumber.length() > 4 ? studentNumber.substring(4, 5) : "";
+    String lastPartSN = null;
     if (studentNumber.length() <= 6) {
         errors.add("The student number must be at least 6 characters long");
-                //System.out.println("The student number must be at least 6 characters long");
             } else if (!firstPartStudentNumber.matches("[0-9]+")) {
-               // System.out.println("The student number must start with 2 numbers");
                 errors.add("The student number must start with 2 numbers");
             } else if ((!secondPartSN1.matches("[A-Za-z]+")) || (!secondPartSN2.matches("[A-Za-z]+"))) {
                errors.add("The 3rd, 4rd - and sometimes the 5th character too - of the student number must be letters");
-               // System.out.println("The 3rd, 4rd - and sometimes the 5th character too - of the student number must be letters");
-    if (lastPartTrigger.matches("[A-Za-z]+")) {
-            lastPartSN = studentNumber.length() > 5 ? studentNumber.substring(5) : ""; //lastPartSN = studentNumber.substring(5);
-                if (!lastPartSN.matches("[0-9]+")){
-                     errors.add("The last part of the student number must be numbers");
-   // System.out.println("The last part of the student number must be numbers");
-    }
-            } else if (lastPartTrigger.matches("[0-9]+")) {
-                lastPartSN = studentNumber.length() > 4 ? studentNumber.substring(4) : ""; //   lastPartSN = studentNumber.substring(4);
-                if (!lastPartSN.matches("[0-9]+")){
-                    errors.add("The last part of the student number must be numbers");
-    //System.out.println("The last part of the student number must be numbers");
-    }
             }
-
+               // all good till here
+    if (lastPartTrigger.matches("[A-Za-z]+")) { // if the 5th is a letter (3 letters)
+            lastPartSN = studentNumber.substring(5,8); // we start at the 6th
+            } else if (lastPartTrigger.matches("[0-9]+")) { // if the 5th is a number (2 letters)
+            lastPartSN = studentNumber.substring(4, 7);
+            }// we start at the 5th
+    if (!lastPartSN.matches("[0-9]+")){
+                    errors.add("The last part of the student number must be numbers");
+    } else if (!lastPartSN.matches("[0-9]+")){
+                     errors.add("The last part of the student number must be numbers");
+                } 
+            
+return errors; 
 }
-        // Return true if data is valid, false otherwise
- // or false based on validation
-    return errors; 
+   
 }
         
  
 
-}
+
         
 
 

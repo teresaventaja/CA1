@@ -29,15 +29,10 @@ public class CA1 {
 
     public static void main(String[] args) throws FileNotFoundException {
         // TODO code application logic here
-    //String name = null; 
-   // String numClasses = null; 
-   // String studentNumber = null; 
+
         assignVariables firstAttempt = new assignVariables();  
         firstAttempt.assignStudents("students.txt");
-       // firstAttempt.dataValidation(name, numClasses, studentNumber);
-        
-       // firstAttempt.dataValidation();
-  
+
     }
     
 }
