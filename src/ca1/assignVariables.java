@@ -22,14 +22,14 @@ import java.util.Scanner;
 public class assignVariables {
 
        List<Students> studentList = new ArrayList<>();
-      
+      public String name; 
     
     
 public String[][] assignStudents(String file) {
 
  
 try {
-           String name; 
+          // String name; 
             //File file = new File("students.txt");
             //FileReader fr = new FileReader(file);
             BufferedReader br = new BufferedReader(new FileReader (file));
@@ -54,8 +54,8 @@ try {
                 studentList.add(newStudent);
                 
                 
-                   Students[] studentsArray = new Students[studentList.size()];
-   Students[] studentsArray2 = studentList.toArray(studentsArray);
+                   //Students[] studentsArray = new Students[studentList.size()];
+   //Students[] studentsArray2 = studentList.toArray(studentsArray);
         
          String[][] studentDataArray = new String[studentList.size()][3];
                 
