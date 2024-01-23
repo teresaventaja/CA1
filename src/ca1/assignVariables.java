@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import static java.lang.System.console;
 import java.nio.file.Files;
 import java.util.ArrayList;
@@ -63,7 +64,9 @@ try {
             continue;
         }
     }
-/*
+
+    outputToFile(studentList);        
+        /*
 checking if assigning values worked: I run this, and commented out when I saw it worked,
 because this is not requested in the CA 
         
@@ -134,7 +137,42 @@ int indexOfSpace = name.indexOf(" ");
             
 return errors; 
 }
-   
+ 
+
+public void outputToFile(List<Students> studentList) {
+    try (PrintWriter writer = new PrintWriter("myfile.txt")) {
+        for (Students student : studentList) {
+            String workload = determineWorkload(student.getNumberOfClasses());
+            String secondName = getSecondName(student.getStudentName());
+            writer.println(student.getStudentNumber() + " - " + secondName);
+            writer.println(workload);
+        }
+    } catch (IOException e) {
+        System.out.println("An error occurred while writing to the file: " + e.getMessage());
+    }
+}
+
+private String determineWorkload(String numClassesStr) {
+    int numClasses = Integer.parseInt(numClassesStr);
+    if (numClasses == 1) {
+        return "very light";
+    } else if (numClasses == 2) {
+        return "light";
+    } else if (numClasses >= 3 && numClasses <= 5) {
+        return "part time";
+    } else if (numClasses >= 6 && numClasses <= 8) {
+        return "full time";
+    } else {
+        return "unknown"; // Or any other default value
+    }
+}
+
+private String getSecondName(String fullName) {
+    int indexOfSpace = fullName.lastIndexOf(" ");
+    return indexOfSpace != -1 ? fullName.substring(indexOfSpace + 1) : "";
+}
+
+
 }
         
  

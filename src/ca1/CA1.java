@@ -17,9 +17,11 @@ import java.util.logging.Logger;
      * When in operation, the program will be given a file named “students.txt” – this contains the details of (fictitious) students in the following format: 
 
 Your task is to: 
-3)	If the data is valid, then you have to output the data to a file named status.txt, in the following format:
-Student number> - Second Name>
-Workload>
+3)	If the data is valid, I need to output the data to a file named myfile.txt, in the following format:
+Student number - Second Name
+Workload
+* 
+* The workload: if numClasses is 1, "very light"; if numClasses is 2, "light"; if numClasses is 1, "very light"; if numClasses is 3,4,5, "part time"; if numClasses is 6,7,8 "part time"; 
  * @author User
  */
 public class CA1 {
@@ -30,12 +32,12 @@ public class CA1 {
         // Instanciating assignVariables Class
         assignVariables firstAttempt = new assignVariables();
        
-//-----------------READING FILE, VALIDATING CONTENT, AND ASSIGNING VALUES------------- 
+//-----------------READING FILE, VALIDATING CONTENT, AND ASSIGNING VALUES-------------
+//-----------------OUTPUT IN A NEW FILE, TRANSFORMING THE DATA-------------
         
         // Calling assignStudents method
         firstAttempt.assignStudents("students.txt");
-        
-//-----------------OUTPUT IN A NEW FILE, TRANSFORMING THE DATA------------- 
+
 
     }
     
