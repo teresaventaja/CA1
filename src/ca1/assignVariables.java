@@ -111,19 +111,23 @@ int indexOfSpace = name.indexOf(" ");
     String secondPartSN2 = studentNumber.length() > 2 ? studentNumber.substring(2, 4) : ""; 
     String lastPartTrigger = studentNumber.length() > 4 ? studentNumber.substring(4, 5) : "";
     String lastPartSN = null;
-    
+    int reasonableYear = 20;
     //handling first part of Student Number
     if (studentNumber.length() <= 6) {
-        errors.add("The student number must be at least 6 characters long");
+        errors.add("The student number must be at least 6 characters long");//
+        // starts by 20 or higher (2020)
             } else if (!firstPartStudentNumber.matches("[0-9]+")) {
-                errors.add("The student number must start with 2 numbers");     
-                
+                errors.add("The student number must start with 2 numbers"); 
+            } else if (Integer.parseInt(firstPartStudentNumber) < reasonableYear) {  
+            errors.add("The student number must start with a number higher than " +reasonableYear);
     //handling second part of Student Number            
             } else if ((!secondPartSN1.matches("[A-Za-z]+")) || (!secondPartSN2.matches("[A-Za-z]+"))) {
                errors.add("The 3rd, 4rd - and sometimes the 5th character too - of the student number must be letters");
             }
 
     //handling last part of Student Numbe
+    int reasonableNum1 = 1;
+    int reasonableNum2 = 200;
     if (lastPartTrigger.matches("[A-Za-z]+")) { // if the middle part has 3 letters
             lastPartSN = studentNumber.substring(5,8); // last part starts at the 6th
             } else if (lastPartTrigger.matches("[0-9]+")) { // if the middle part has 3 letters
@@ -131,8 +135,8 @@ int indexOfSpace = name.indexOf(" ");
             }
     if (!lastPartSN.matches("[0-9]+")){
                     errors.add("The last part of the student number must be numbers");
-    } else if (!lastPartSN.matches("[0-9]+")){
-                     errors.add("The last part of the student number must be numbers");
+    } else if ((Integer.parseInt(lastPartSN)<reasonableNum1)||(Integer.parseInt(lastPartSN) > reasonableNum2)  ){
+                     errors.add("The last part of the student number must be between "+reasonableNum1+" and "+reasonableNum2);
                 } 
             
 return errors; 
