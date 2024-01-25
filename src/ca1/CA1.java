@@ -16,8 +16,6 @@ import java.util.logging.Logger;
  *Github: https://github.com/teresaventaja/CA1
      * When in operation, the program will be given a file named “students.txt” – this contains the details of (fictitious) students in the following format: 
 
-student number year 2020 (Start of number 20 or higher)
-* number after letter is between 1-200
 * menu user decide standard operation or adding (validated) data to the file via console (invalid data should not be saved)
  * @author User
  */
