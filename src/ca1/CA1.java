@@ -14,9 +14,6 @@ import java.util.logging.Logger;
 
 /**
  *Github: https://github.com/teresaventaja/CA1
-     * When in operation, the program will be given a file named “students.txt” – this contains the details of (fictitious) students in the following format: 
-
-* menu user decide standard operation or adding (validated) data to the file via console (invalid data should not be saved)
  * @author User
  */
 public class CA1 {
@@ -27,15 +24,14 @@ public class CA1 {
         // Instanciating assignVariables Class
         assignVariables operation = new assignVariables();
        
-//-----------------READING FILE, VALIDATING CONTENT, AND ASSIGNING VALUES-------------
-//-----------------OUTPUT IN A NEW FILE, TRANSFORMING THE DATA-------------
-        
         get_user_input console = new get_user_input();
         String userInput = console.askString("Introduce the word <Standard> to transfer students from a file, or the word <Manual> to add a student manually");
         if ("Standard".equals(userInput)) {   
-        // Calling assignStudents method
+//-----------------READING FILE, VALIDATING CONTENT, AND ASSIGNING VALUES-------------
+//-----------------OUTPUT IN A NEW FILE, TRANSFORMING THE DATA-------------
         operation.assignStudents("students.txt");
         } else if ("Manual".equals(userInput)) {
+//-----------------MANUAL INPUT IN THE FILE, TRANSFORMING THE DATA-------------
         operation.addStudentManually();
         System.out.println("Student added manually");
         } else {
