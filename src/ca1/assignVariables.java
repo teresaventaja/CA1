@@ -144,7 +144,7 @@ int indexOfSpace = name.indexOf(" ");
 return errors; 
 }
  
-
+// Method to save the data in a file
 public void outputToFile(List<Students> studentList) {
     try (PrintWriter writer = new PrintWriter("status.txt")) {
         for (Students student : studentList) {
@@ -158,6 +158,7 @@ public void outputToFile(List<Students> studentList) {
     }
 }
 
+// method to convert classes into workload
 private String determineWorkload(String numClassesStr) {
     int numClasses = Integer.parseInt(numClassesStr);
     if (numClasses == 1) {
@@ -179,7 +180,7 @@ private String getSecondName(String fullName) {
 }
 
 
-
+// method to add (validated) data manually
 public void addStudentManually() {
         Scanner scanner = new Scanner(System.in);
         

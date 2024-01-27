@@ -31,13 +31,13 @@ public class CA1 {
 //-----------------OUTPUT IN A NEW FILE, TRANSFORMING THE DATA-------------
         
         get_user_input console = new get_user_input();
-        String userInput = console.askString("Introduce the word <Standard> to transfer students from a file, or the word <Manual> to add students manually");
+        String userInput = console.askString("Introduce the word <Standard> to transfer students from a file, or the word <Manual> to add a student manually");
         if ("Standard".equals(userInput)) {   
         // Calling assignStudents method
         operation.assignStudents("students.txt");
         } else if ("Manual".equals(userInput)) {
         operation.addStudentManually();
-        System.out.println("Students added manually");
+        System.out.println("Student added manually");
         } else {
         System.out.println("Incorrect input. Please, introduce <Standard> or <Manual>");
         }
