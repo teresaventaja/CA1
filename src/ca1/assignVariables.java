@@ -179,11 +179,35 @@ private String getSecondName(String fullName) {
 }
 
 
-}
+
+public void addStudentManually() {
+        Scanner scanner = new Scanner(System.in);
         
+        System.out.print("Enter student's name: ");
+        name = scanner.nextLine().trim();
+
+        System.out.print("Enter the number of classes: ");
+        numClasses = scanner.nextLine().trim();
+
+        System.out.print("Enter student number: ");
+        studentNumber = scanner.nextLine().trim();
+
+        List<String> validationErrors = dataValidation(name, numClasses, studentNumber);
+        
+        if (validationErrors.isEmpty()) {
+            Students newStudent = new Students(name, numClasses, studentNumber);
+            studentList.add(newStudent);
+            outputToFile(studentList);   
+            System.out.println("Student added successfully.");
+        } else {
+            for (String error : validationErrors) {
+                System.out.println(error);
+            }
+        }
+    }
  
 
-
+}
         
 
 

@@ -25,14 +25,22 @@ public class CA1 {
     public static void main(String[] args) throws FileNotFoundException {
 
         // Instanciating assignVariables Class
-        assignVariables firstAttempt = new assignVariables();
+        assignVariables operation = new assignVariables();
        
 //-----------------READING FILE, VALIDATING CONTENT, AND ASSIGNING VALUES-------------
 //-----------------OUTPUT IN A NEW FILE, TRANSFORMING THE DATA-------------
         
+        get_user_input console = new get_user_input();
+        String userInput = console.askString("Introduce the word <Standard> to transfer students from a file, or the word <Manual> to add students manually");
+        if ("Standard".equals(userInput)) {   
         // Calling assignStudents method
-        firstAttempt.assignStudents("students.txt");
-
+        operation.assignStudents("students.txt");
+        } else if ("Manual".equals(userInput)) {
+        operation.addStudentManually();
+        System.out.println("Students added manually");
+        } else {
+        System.out.println("Incorrect input. Please, introduce <Standard> or <Manual>");
+        }
 
     }
     
