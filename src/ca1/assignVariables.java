@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.System.console;
@@ -30,42 +31,44 @@ public class assignVariables {
 public String[][] assignStudents(String file) {
 
 try {
-            // assigning values to lines in the text file (non-validated)
-            BufferedReader br = new BufferedReader(new FileReader (file));
-        while ((name = br.readLine()) != null) { //reads first line
-            name = name.trim(); // Remove whitespaces
-            numClasses = br.readLine();  //reads second line
-            studentNumber = br.readLine(); // Read third line (student number)
+    // assigning values to lines in the text file (non-validated)
+    BufferedReader br = new BufferedReader(new FileReader (file));
+    while ((name = br.readLine()) != null) { //reads first line
+        name = name.trim(); // Remove whitespaces
+        numClasses = br.readLine();  //reads second line
+        studentNumber = br.readLine(); // Read third line (student number)
             
-            if (numClasses == null || studentNumber == null) { 
+        //handling incomplete student data
+        if (numClasses == null || studentNumber == null) { 
             System.out.println("Incomplete data after student name: " + name);
             continue;
-                }
+        }
 
-        // validating the data     
+            // validating the data     
             List<String> validationErrors = dataValidation(name, numClasses, studentNumber);
-        if (validationErrors.isEmpty()) { // if there are no errors
-            Students newStudent = new Students(name, numClasses, studentNumber);
-            studentList.add(newStudent); // we add the student (no errors)
-            String[][] studentDataArray = new String[studentList.size()][3]; //store students in an 2D array
+            if (validationErrors.isEmpty()) { // if there are no errors
+                Students newStudent = new Students(name, numClasses, studentNumber);
+                studentList.add(newStudent); // we add the student (no errors)
+                String[][] studentDataArray = new String[studentList.size()][3]; //store students in an 2D array
         
-        // assign variables to each student    
-        for (int i = 0; i < studentList.size(); i++) {
-            newStudent = studentList.get(i);
-            studentDataArray[i][0] = newStudent.getStudentName();
-            studentDataArray[i][1] = newStudent.getNumberOfClasses();
-            studentDataArray[i][2] = newStudent.getStudentNumber();
-        }
-        // output in case there are errors
-        } else {
-            for (String error : validationErrors) {
+                // assign variables to each student    
+                for (int i = 0; i < studentList.size(); i++) {
+                    newStudent = studentList.get(i);
+                    studentDataArray[i][0] = newStudent.getStudentName();
+                    studentDataArray[i][1] = newStudent.getNumberOfClasses();
+                    studentDataArray[i][2] = newStudent.getStudentNumber();
+                }
+                // output in case there are errors, print "errors" arrayList
+            } else {
+                for (String error : validationErrors) {
                 System.out.println(error);
-            }
+                }
             continue;
-        }
+            }
     }
 
-    outputToFile(studentList);        
+// Writing the transformed data into the output file        
+outputToFile(studentList);        
         /*
 checking if assigning values worked: I run this, and commented out when I saw it worked,
 because this is not requested in the CA 
@@ -85,7 +88,7 @@ because this is not requested in the CA
 }
         
 
-// method to validate the data (where the errors messages are coded)
+// method to validate the input data (where the errors messages are coded)
 public List<String> dataValidation(String name, String numClasses, String studentNumber) {
     List<String> errors = new ArrayList<>();
 
@@ -114,39 +117,43 @@ int indexOfSpace = name.indexOf(" ");
     int reasonableYear = 20;
     //handling first part of Student Number
     if (studentNumber.length() < 6) {
-        errors.add("The student number must be at least 6 characters long");//
-        // starts by 20 or higher (2020)
-            } else if (!firstPartStudentNumber.matches("[0-9]+")) {
-                errors.add("The student number must start with 2 numbers"); 
-            } else if (Integer.parseInt(firstPartStudentNumber) < reasonableYear) {  
-            errors.add("The student number must start with a number higher than " +reasonableYear);
+        errors.add("The student number must be at least 6 characters long");
+    } else if (!firstPartStudentNumber.matches("[0-9]+")) {
+        errors.add("The student number must start with 2 numbers"); 
+    // starts by 20 or higher (2020)
+    } else if (Integer.parseInt(firstPartStudentNumber) < reasonableYear) {  
+        errors.add("The student number must start with a number higher than " +reasonableYear);
     //handling second part of Student Number            
-            } else if ((!secondPartSN1.matches("[A-Za-z]+")) || (!secondPartSN2.matches("[A-Za-z]+"))) {
-            errors.add("The 3rd, 4rd - and sometimes the 5th character too - of the student number must be letters");
-            }
+    } else if ((!secondPartSN1.matches("[A-Za-z]+")) || (!secondPartSN2.matches("[A-Za-z]+"))) {
+        errors.add("The 3rd, 4rd - and sometimes the 5th character too - of the student number must be letters");
+    }
 
     //handling last part of Student Numbe
     int reasonableNum1 = 1;
     int reasonableNum2 = 200;
+    // finding out where the last part starts
     if (lastPartTrigger.matches("[A-Za-z]+")) { // if the middle part has 3 letters
-            lastPartSN = studentNumber.substring(5); // last part starts at the 6th
-            } else if (lastPartTrigger.matches("[0-9]+")) { // if the middle part has 3 letters
-            lastPartSN = studentNumber.substring(4);// last part starts at the 6th
-            }
+        lastPartSN = studentNumber.substring(5); // last part starts at the 6th
+    } else if (lastPartTrigger.matches("[0-9]+")) { // if the middle part has 3 letters
+        lastPartSN = studentNumber.substring(4);// last part starts at the 6th
+    }
+    
+    // last part: error messages
     if (!lastPartSN.matches("[0-9]+")){
-                    errors.add("The last part of the student number must be numbers");
+        errors.add("The last part of the student number must be numbers");
     } else if (Integer.parseInt(lastPartSN) < reasonableNum1) {
-                     errors.add("The last part of the student number must be higher than "+reasonableNum2);
-                } else if (Integer.parseInt(lastPartSN) > reasonableNum2) {
-                errors.add("The last part of the student number must be lower than "+reasonableNum2);
-                }
-            
+        errors.add("The last part of the student number must be higher than "+reasonableNum2);
+    } else if (Integer.parseInt(lastPartSN) > reasonableNum2) {
+        errors.add("The last part of the student number must be lower than "+reasonableNum2);
+    }
+// we have compiled all errors in an arrayList            
 return errors; 
 }
  
 // Method to save the data in a file
 public void outputToFile(List<Students> studentList) {
-    try (PrintWriter writer = new PrintWriter("status.txt")) {
+     try (FileWriter fw = new FileWriter("status.txt", true); // not overriding the previous content in the file
+         PrintWriter writer = new PrintWriter(fw)) {
         for (Students student : studentList) {
             String workload = determineWorkload(student.getNumberOfClasses());
             String secondName = getSecondName(student.getStudentName());
@@ -170,10 +177,11 @@ private String determineWorkload(String numClassesStr) {
     } else if (numClasses >= 6 && numClasses <= 8) {
         return "full time";
     } else {
-        return "unknown"; // Or any other default value
+        return "There is an error in the number of classes";
     }
 }
 
+// extracting second name to write into output file
 private String getSecondName(String fullName) {
     int indexOfSpace = fullName.lastIndexOf(" ");
     return indexOfSpace != -1 ? fullName.substring(indexOfSpace + 1) : "";
@@ -193,15 +201,16 @@ public void addStudentManually() {
         System.out.print("Enter student number: ");
         studentNumber = scanner.nextLine().trim();
 
+        // calling validation method
         List<String> validationErrors = dataValidation(name, numClasses, studentNumber);
         
-        if (validationErrors.isEmpty()) {
+        if (validationErrors.isEmpty()) { //saving in file if no errors are found
             Students newStudent = new Students(name, numClasses, studentNumber);
             studentList.add(newStudent);
             outputToFile(studentList);   
             System.out.println("Student added successfully.");
         } else {
-            for (String error : validationErrors) {
+            for (String error : validationErrors) { //handling errors
                 System.out.println(error);
             }
         }
